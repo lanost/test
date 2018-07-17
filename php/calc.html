@@ -1,0 +1,64 @@
+<html>
+<body>
+
+<h2>CALCULATOR</h2>
+<div>
+<form method="post">
+  First number:<br>
+  <input type="number" name="num1" id="nm1" required>
+  <br>
+  second number:<br>
+  <input type="number" name="num2" id="nm2" required>
+  <br><br>
+
+ 
+
+ <input type="radio" name="oper" value="add" checked> add<br>
+ <input type="radio" name="oper" value="sub"> subtract<br>
+ <input type="radio" name="oper" value="mul"> multiply<br>
+ <input type="radio" name="oper" value="div"> divide<br>
+
+
+<!--
+<select id="opr">
+  <option value="add">add</option>
+  <option value="sub">subtract</option>
+  <option value="mul">Multiply</option>
+  <option value="div">divide</option>
+</select> 
+
+-->
+
+  <br><br>
+
+  <button type="button" onclick="calculate()">Submit</button> 
+  <input type="reset" value="Reset">
+</form> 
+</div>
+<script>
+function calculate() {
+var num1 = document.getElementById("nm1").value;
+var num2 = document.getElementById("nm2").value;
+var opera = document.querySelector('input[name=oper]:checked').value;
+console.log(opera);
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     document.getElementById("demo").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("POST", "calc.php", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  var parameters="number="+num1+"&numberr="+num2+"&operation="+opera;
+  xhttp.send(parameters);
+}
+
+</script>
+
+<br>
+<div id="demo">
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,54 @@
+<html>
+<body>
+
+<h2>CURRENCY CALCULATOR</h2>
+
+<form method="post">
+  Amount:<br>
+  <input type="number" name="amount" id="amnt" value="<?php echo htmlspecialchars($amount); ?>" required>
+  <br>
+ <select name="currency" id="curr" required>
+  <option selected="<?php echo htmlspecialchars($currency); ?>"><?php echo htmlspecialchars($currency); ?></option>
+  <option value="US Dollar">US Dollar</option>
+  <option value="Euro">Euro</option>
+  <option value="British Pound">British Pound</option>
+  <option value="Australian Dollar">Australian Dollar</option>
+  <option value="Canadian Dollar">Canadian Dollar</option>
+  <option value="Singapore Dollar">Singapore Dollar</option>
+  <option value="Swiss Franc">Swiss Franc</option>
+  <option value="Malaysian Ringgit">Malaysian Ringgit</option>
+  <option value="Japanese Yen">Japanese Yen</option>
+  <option value="Chinese Yuan Renminbi">Chinese Yuan Renminbi</option>
+</select> 
+
+<br><br>
+
+ <button type="button" onclick="convert()">Submit</button> 
+  <input type="reset" value="Cancel">
+</form> 
+<script>
+function convert() {
+var amnt = document.getElementById("amnt").value;
+var curr = document.getElementById("curr").value;
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     document.getElementById("demo").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("POST", "currency.php", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  var parameters="amount="+amnt+"&currency="+curr;
+  xhttp.send(parameters);
+}
+
+</script>
+
+<br>
+<div id="demo">
+
+</div>
+</body>
+</html>
+
